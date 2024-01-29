@@ -1,0 +1,196 @@
+\section{Second-Order Optimality Conditions}
+\subsection{}
+    \begin{frame}{Motivation}
+    Consider the unconstrained optimization problem of the form:
+        \begin{equation}
+            min\{ f(x): x \in \mathbb{R}^n\}, f: \mathbb{R}^n \longrightarrow \mathbb{R}
+        \end{equation}
+        $f$ non-linear.
+        \begin{parchment}[Problem]
+            How to find exactly minimum (or maximum) points of eq.(4)?
+        \end{parchment}
+    
+    \end{frame}
+
+    \begin{frame}{Definition}
+        \begin{block}{Positive semidefinite matrix and positive definite matrix}
+        Let $f : A^{n \times n}, d \in \mathbb{R}^n$, if :
+        \begin{itemize}
+            \item $\langle Ad,d \rangle \geq 0 \implies A$ is positive semidefinite $(A \succeq 0)$.
+            \item $\langle Ad,d \rangle > 0, d \neq 0 \implies A$ is positive definite $(A \succ 0)$.
+        \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Definition}
+        \begin{block}{Hessian matrix and Second-order theorem}
+        Let $x, \overline{x} \in \mathbb{R}^n$ and $f \in C^2$. We have:
+        \begin{itemize}
+            \item $Hf(x) = \bigtriangledown^2f(x) = \bigtriangledown (\bigtriangledown f(x))$ is called Hessian matrix.
+            \item If $\overline{x}$ is a local minimizer $\implies \bigtriangledown f(\overline{x}) = 0, Hf(\overline{x}) \succeq 0$ (Second-order necessary condition).
+            \item If $\overline{x} \in \mathbb{R}^n, \bigtriangledown f(\overline{x}) = 0, Hf(\overline{x}) \succ 0 \implies \overline{x}$ is strict local minimizer (Second-order sufficient condition ).
+            \item  If $U \subseteq \mathbb{R}^n $ is a open convex set, $\overline{x} \in U, \bigtriangledown f(\overline{x}) = 0, Hf(\overline{x}) \succeq 0 \implies x$ is a global minimizer (Second-order sufficient condition for a global minimizer).
+            \item  If $\bigtriangledown f(\overline{x}) = 0, Hf(x)$ is indefinite $\implies \overline{x}$ is a \textbf{saddle point} (Second-order sufficient condition for a saddle point)
+        \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Discussion}
+        \begin{block}{Proof: Second-order necessary condition for a local minimizer}
+        \begin{itemize}
+            \item Let $\overline{x}$ is a local minimizer, $|t|$ is small enough, $\forall d \in \mathbb{R}^n$, Then:
+                \begin{equation}
+                    f(\overline{x} + td) - f(\overline{x}) \geq 0
+                \end{equation}
+            % \item Because $t > 0$:
+            %     \begin{equation}
+            %         \frac{f(\overline{x} + td) - f(\overline{x})}{t} \geq 0
+            %     \end{equation}
+            % \item Let $t \rightarrow 0^+ \implies$eq.(3) $\geq 0; t< 0, t \rightarrow 0^- \implies$ eq.(3) $\leq 0$. Therefore $\langle \bigtriangledown f(\overline{x}), d \rangle = 0 \implies \bigtriangledown f(\overline{x}) = 0$.
+            \item Because $f \in C^2$, then:
+                \begin{equation}
+                    f(\overline{x} +td) = f(x) + t\langle \bigtriangledown f(\overline{x}), d \rangle + \frac{t^2}{2}\langle \bigtriangledown^2 f(\overline{x})d, d \rangle + o(t^2)
+                \end{equation}
+            \item  We have $\langle \bigtriangledown f(\overline{x}), d \rangle = 0$. Then:
+                \begin{equation}
+                    0 \leq f(\overline{x} + td) - f(\overline{x}) = \frac{t^2}{2}\langle \bigtriangledown^2 f(\overline{x})d, d \rangle + o(t^2) \implies \bigtriangledown^2 f(\overline{x})d, d \rangle \geq 0 \implies \bigtriangledown^2 f(\overline{x}) \succ 0
+                \end{equation}
+        \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Discussion}
+        \begin{block}{Proof: Second-order sufficient condition for a local minimizer}
+        \begin{itemize}
+            \item If $\bigtriangledown^2 f(\overline{x}) \succ 0$, let $\lambda $ is a smallest eigenvalue of $\bigtriangledown^2 f(\overline{x})$ $\implies \langle \bigtriangledown^2 f(\overline{x})d, d \rangle \geq \lambda ||d||^2, \forall d \in \mathbb{R}^n$.
+            \item  We have $\langle \bigtriangledown f(\overline{x}), d \rangle = 0$. Then
+                \begin{equation}
+                f(\overline{x} + td) =  f(\overline{x}) + \frac{t^2}{2}\langle \bigtriangledown^2 f(\overline{x})d, d \rangle + o(t^2) \implies
+                \frac{f(\overline{x} + td) - f(\overline{x})}{t^2} \geq \frac{\lambda ||d||^2}{2} + \frac{o(t^2)}{t^2}
+                \end{equation}
+            \item $|t|$ is small enough $\implies f(\overline{x} + td) - f(\overline{x}) > 0, \forall 0 \ne d \in \mathbb{R}^n\implies \overline{x}$ is strict local minimizer of $f$ in $\mathbb{R}^n$.
+        \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Discussion}
+        \begin{block}{Proof: Second-order suﬀicient condition for a global minimizer}
+        Let $y \in U \implies \exists z \in (x, y)$:
+        \begin{equation}
+            f(y) = f(x) +  \langle \bigtriangledown f(x), y - x \rangle + \frac{1}{2}(y-x)^THf(z)(y-x)
+        \end{equation}
+        Because $\bigtriangledown f(x) > 0, Hf(x) \succeq 0 \implies f(y) \geq f(x)$. Thus, $x$ is a global minimizer of $f$ on $U$.
+        \end{block}
+    \end{frame}
+
+    
+    \begin{frame}{Discussion}
+        \begin{block}{Consequence}
+             Since: $max \{f(x)| x \in \mathbb{R}^n\} = - min\{-f(x)| x \in \mathbb{R}^n\}$, we have:
+            \begin{itemize}
+            \item If $\overline{x}$ is a local maximizer of $f(x) \implies \bigtriangledown f(\overline{x}) = 0 $ and $\bigtriangledown^2 f(\overline{x}) \preceq 0$  
+            \item If $\bigtriangledown f(\overline{x}) = 0$ and $\bigtriangledown^2 f(\overline{x}) \prec 0$ $\implies \overline{x}$ is a strict local maximizer of $f(x)$
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Meaning of Second-Order Optimality Conditions}
+    \begin{itemize}
+        \item The second order condition is a filter that helps identify the nature of stationary points is a local minimum, local maximum, or saddle point. The result of the second derivative at a point $x$ tells us the slope of the tangent line.
+        \item Useful in practice: Optimize for Machine Learing, Deep learing algorithmns.
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{How to find ?}
+        Let $x \in A^n, f: A^n \rightarrow \mathbb{R}$:
+        \begin{itemize}
+            \item We differentiate once to find $\bigtriangledown f(x)$.
+            \item Let $\bigtriangledown f(x) = 0$, we find all critical points.
+            \item  We differentiate twice to find $\bigtriangledown ^2 f(x)$.
+            \item For each point $x_0$ in step (2), calculate $\bigtriangledown ^2 f(x_0)$. If:
+            \begin{itemize}
+                \item $\bigtriangledown ^2 f(x_0) \succ 0 \implies x_0$ is a local minimizer (if A convex $x_0$ is a global minimizer).
+                \item $\bigtriangledown ^2 f(x_0) \prec 0 \implies x_0$ is a local maximizer.
+                \item $\bigtriangledown ^2 f(x_0)$ is indefinite $\implies x_0$ is a saddle points.
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Computational example}
+        \begin{block}{Problem 1: Find all critical points of $f(x)$}
+            \begin{equation}
+                f(x) = x^5 - 5x
+            \end{equation}
+        \end{block}
+        Proof: \\
+        - Let $x \rightarrow +\infty \implies f(x) \rightarrow +\infty$; $x \rightarrow -\infty \implies f(x) \rightarrow -\infty$. Thus, $f(x)$ hasn't global critical points. \\
+        - $f'(x) = 5x^4 -5 = 0 \Leftrightarrow x = \pm 1.$ \\
+        - $f''(x) = 20x^3, f''(1) = 20 > 0, f''(-1) = -20 < 0 \implies x_1=1 $ is a local minimizer, $x_2=-1$ is a local maximizer.
+    \end{frame}
+    
+    \begin{frame}{Computational example}
+        \begin{block}{Problem 2: Find all minimizers and maximizers of $f(x, y)$}
+            \begin{equation}
+                f(x,y) = \frac{1}{4}(x^4 -4xy +y^4)
+            \end{equation}
+        \end{block}
+        Proof: \\
+        - We have:
+        \begin{equation}
+            \bigtriangledown f(x, y) = \begin{pmatrix}
+                x^3 & -y \\
+                -x & +y^3
+            \end{pmatrix}, 
+            \bigtriangledown^2 f(x, y) = \begin{pmatrix}
+                3x^2 & -1 \\
+                -1 & + 3y^2
+            \end{pmatrix}
+        \end{equation}
+
+        - $\bigtriangledown f(x,y) = 0 \Leftrightarrow (x,y) \in \{(0,0)^T, (1,1)^T, (-1, -1)^T\}$. We have:
+        \begin{equation}
+            \bigtriangledown^2 f(0,0) = \begin{pmatrix}
+                0 & -1 \\
+                -1 & 0
+            \end{pmatrix}, \bigtriangledown^2 f(1,1) =  \bigtriangledown^2 f(-1,-1) = \begin{pmatrix}
+                3 & -1 \\
+                -1 & 3
+            \end{pmatrix}
+        \end{equation}
+        - Because  $\bigtriangledown^2 f(1,1) \succ 0$ and $\bigtriangledown^2 f(-1,-1) \succ 0 \implies (\pm 1, \pm 1)^T $ is strict local minimizers. $\mathbb{R}^2$ is convex set $\implies (\pm 1, \pm 1)^T$ also is global minimizers.
+        
+        - Because  $\bigtriangledown^2 f(0,0) \notin \{\succeq 0, \preceq 0 \} \implies (0,0)^T$ not is local critical points.
+    \end{frame}
+
+    \begin{frame}{Computational example}
+        \begin{block}{Problem 3:  Consider the family of problems}
+            \begin{equation}
+                min f(x,y) = x^2 + y^2 +\beta xy + x + 2y
+            \end{equation}
+        \end{block}
+        Proof: \\
+        - We have:
+        \begin{equation}
+            \bigtriangledown f(x, y) = \begin{pmatrix}
+                2x + \beta y  +1 \\
+                2y + \beta x  +2
+            \end{pmatrix}, 
+            \bigtriangledown^2 f(x, y) = \begin{pmatrix}
+                2 & \beta \\
+                \beta & 2
+            \end{pmatrix}
+        \end{equation}
+
+        - If $\beta \ne \pm 2 \implies$$\bigtriangledown f(x,y) = 0 \Leftrightarrow (x^*,y^*) = (2\beta -2, \beta-4) / (4-\beta^2)$.
+
+        - If $\beta = \pm 2$, we have an inconsistent system of equations. Therefore, no critical points exist for $\beta = \pm 2$
+        
+       - Let $A = Hf(x,y), \lambda$ is a eigenvalue of A. We have:
+       \begin{equation}
+           det(A-\lambda I) = (2 - \lambda)^2 - \beta ^2 = 0 \Leftrightarrow \lambda = 2 \pm \beta
+       \end{equation}
+
+       - If $-2 < \beta < 2 \implies A \succ 0, \forall \lambda > 0 \implies (x^*, y^*)$ is global minimizers.
+       
+       - If $|\beta | > 2 \implies \lambda_1 \lambda_2 < 0 \implies (x^*, y^*)$ is saddle points.
+    \end{frame}
