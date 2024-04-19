@@ -1,0 +1,62 @@
+\section{Bài 04}
+
+Trong bài toán,
+\begin{equation}
+    \begin{aligned}
+        \min \quad & \sum_{j=1}^n\frac{c_j}{x_j}\\
+        \textrm{s.t.} \quad & \sum_{j=1}^na_jx_j = b,\\
+          &x_j \geq 0, j = 1, \dots, n,  \\
+    \end{aligned}
+\end{equation}
+trong đó $a_j, c_j, b$ là các hằng số dương. Viết điều kiện FJ, và nếu áp dụng điều kiện KKT. Sau đó giải (các) nghiệm tối ưu $x^{*} = (x^{*}_1, x^{*}_2, \dots, x^{*}_n)$.
+
+\begin{solution}
+
+    Các thành phần của bài toán
+    \begin{equation}
+        \begin{cases}
+            f(x) = \sum_{j=1}^n\frac{c_j}{x_j} \\
+            h_1(x) = \sum_{j=1}^na_jx_j - b
+        \end{cases}
+    \end{equation}
+    Ta thử viết các điều kiện Fritz John. Bằng cách tính toán, ta hình thành dạng yếu của hàm Lagrangian như sau:
+    \begin{equation}
+        L = \lambda_0\left(\sum_{j=1}^n\frac{c_j}{x_j}\right) + \mu_1\left(\sum_{j=1}^na_jx_j - b\right)
+    \end{equation}
+    Và ta viết được các điều kiện FJ như sau:
+    \begin{enumerate}[label=(\alph*)]
+        \item \begin{equation}
+            -\lambda_0\left(\sum_{j=1}^n\frac{c_j}{x^2_j}\right) + \mu_1\left(\sum_{j=1}^na_j\right) = 0
+        \end{equation}
+    \end{enumerate}
+    Nếu $\lambda_0 = 0$, thì $\mu_1 = 0$, điều này dẫn đến bài toán vô nghĩa. Thế nên, $\lambda_0 \ne 0$. Ta sử dụng hàm Lagrangian và viết các điều kiện KKT để dễ dàng hơn trong việc giải quyết bài toán này. Ta có hàm Lagrangian như sau:
+    \begin{equation}
+        L(x, \lambda) = \sum_{j=1}^n\frac{c_j}{x_j} + \mu_1\left(\sum_{j=1}^na_jx_j - b\right)
+    \end{equation}
+    và các điều kiện KKT được viết như sau:
+    \begin{enumerate}[label=(\alph*)]
+        \item \begin{equation}
+            \dfrac{\partial L}{\partial x_j} = -\left(\sum_{j=1}^n\frac{c_j}{x^2_j}\right) + \mu_1\left(\sum_{j=1}^na_j\right) = 0, 
+        \end{equation}
+        \item \begin{equation}
+            \sum_{j=1}^na_jx_j - b = 0, 
+        \end{equation}
+    Tính tổng biểu thức (4.6), ta có:
+    \begin{equation}
+        -\left(\sum_{j=1}^nc_j\right)\left(\sum_{j=1}^nx^2_j\right)^{-1} + \mu_1\left(\sum_{j=1}^na_j\right) = -\mathbf{C}\mathbf{x}^{-1} + \mu_1\mathbf{A} = 0\Leftrightarrow \mathbf{x} = \dfrac{\mathbf{C}}{\mu_1\mathbf{A}}
+    \end{equation}
+    Và dựa trên biểu thức (4.7), ta có:
+    \begin{equation}
+        \sum_{j=1}^na_jx_j - b = \left(\sum_{j=1}^na_j\right)\left(\sum_{j=1}^nx_j\right) - b = \mathbf{A}\mathbf{x} - b = \mathbf{A}\dfrac{\mu_1\mathbf{A}}{\mathbf{C}} - b = 0
+    \end{equation}
+    Ta tính được:
+    \begin{equation}
+        \mu_1 = \dfrac{\mathbf{C}b}{\mathbf{A}^2}
+    \end{equation}
+    Suy ra được:
+    \begin{equation}
+        \mathbf{x} = \dfrac{\mathbf{A}}{b} \quad\text{hay}\quad b\mathbf{x} = \mathbf{A}
+    \end{equation}
+    Ta giải phương trình $b\mathbf{x} = \mathbf{A}$ thì thu được nghiệm tối ưu $x^{*} = (x^{*}_1, x^{*}_2, \dots, x^{*}_n)$.
+    \end{enumerate}
+\end{solution}

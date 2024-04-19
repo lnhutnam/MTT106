@@ -1,0 +1,136 @@
+\section{Bài 01}
+
+
+\begin{corollary}{1}
+    \label{coro:slater}
+    Giả sử các hàm $\{g_i \}_1^r$ là lồi, và hàm $\{h_j \}_1^r$ là các hàm affine. Gọi $x^*$ là một cực tiểu địa phương của bài toán $(P)$. Nếu tồn tại một điểm khả thi $x_0$, khả thi ngặt cho ràng buộc động (active constraints) $g_i$ là 
+    \begin{equation}
+        g_i(x_0) < 0, i \in I(x^*)
+    \end{equation}
+    thì các điều kiện KKT là thỏa mãn tại $x^*$
+\end{corollary}
+
+Bài toán. Tìm giá trị cực tiểu của hàm 
+\begin{equation}
+    f(x, y) = (x-2)^2 + (y-1)^2
+\end{equation}
+thỏa mãn điều kiện $y \geq x^2$ và $x + y \leq 2$
+
+\begin{solution}{*}
+    Bài toán tối ưu có thể được viết như sau:
+    \begin{equation}
+        \begin{aligned}
+            \min \quad & (x-2)^2 + (y-1)^2\\
+            \textrm{s.t.} \quad & x + y - 2 \leq 0\\
+              & x^2 - y \leq 0    \\
+        \end{aligned}
+    \end{equation}
+    Các thành phần trong bài toán này như sau:
+    \begin{align}
+        \begin{aligned}
+            f(x,y) &= (x-2)^2 + (y-1)^2\\
+            g_1(x,y) &= x + y - 2\\
+            g_2(x, y) &= x^2 - y 
+        \end{aligned}
+    \end{align}
+    
+    Ta thấy miền ràng buộc (constraint region) là compact. Bởi vì các ràng buộc là những hàm lồi (convex function), nên tồn tại một lời giải khả thi nghiêm ngặt, điều kiện Slater (Hệ quả \ref{coro:slater}) thỏa mãn. Điều này dẫn đến việc các điều kiện KKT phải thỏa mãn tại bất kỳ cực tiểu địa phương nào. Do đó, ta có hàm Lagrangian như sau:
+    \begin{align}
+        \begin{aligned}
+            L(x, y, \lambda) &= f(x, y) + \lambda_1g_1(x,y) + \lambda_2g_2(x,y)\\
+            L(x, y, \lambda) &= (x-2)^2 + (y-1)^2 + \lambda_1(x + y - 2) + \lambda_2(x^2 - y)
+        \end{aligned}
+    \end{align}
+    và các điều kiện KKT 
+    \begin{enumerate}[label=(\alph*)]
+        \item \begin{equation}
+            \frac{\partial L}{\partial x} = 2(x - 2) + \lambda_1 + 2x\lambda_2 = 0,
+        \end{equation}
+        \item \begin{equation}
+            \frac{\partial L}{\partial y} = 2(y-1) + \lambda_1 - \lambda_2 = 0,
+        \end{equation}
+        \item \begin{equation}
+            \lambda_1 \geq 0, x + y - 2 \leq 0, \lambda_1(x + y - 2) = 0,
+        \end{equation}
+        \item \begin{equation}
+            \lambda_2 \geq 0, x^2 - y \leq 0, \lambda_2(x^2 - y) = 0
+        \end{equation}
+    \end{enumerate}
+    Đơn giản biểu thức (a), và (b), ta thu được
+    \begin{equation}
+        x = \dfrac{4-\lambda_1}{2(\lambda_2 + 1)};\quad y = \dfrac{\lambda_2 - \lambda_1 + 2}{2}
+    \end{equation}
+    Ta xem xét các trường hợp
+    \begin{enumerate}[label=(\roman*)]
+        \item $\lambda_1 > 0$ và $\lambda_2 > 0$. Ta có hệ phương trình:
+        \begin{equation}
+            \begin{cases}
+                x + y - 2 = 0\\
+                x^2 - y = 0\\
+            \end{cases}
+        \end{equation}
+        Giải hệ này, ta được nghiệm  $(x_1, y_1) = (1, 1)$ và $(x_2, y_2) = (-2, 4)$. 
+        \begin{itemize}
+            \item Trường hợp 1: $(x_1, y_1) = (1, 1)$, ta có 
+            \begin{equation}
+                \begin{cases}
+                    \dfrac{4-\lambda_1}{2(\lambda_2 + 1)} = 1 \Leftrightarrow \lambda_1 + 2\lambda_2 = 2\\\\
+                    \dfrac{\lambda_2 - \lambda_1 + 2}{2} = 1 \Leftrightarrow -\lambda_1 + \lambda_2 = 0
+                \end{cases}
+                \Leftrightarrow \begin{cases}
+                    \lambda_1 = \dfrac{2}{3}\\\\
+                    \lambda_2 = \dfrac{2}{3}
+                \end{cases}
+            \end{equation}
+            \item Trường hợp 2: $(x_2, y_2) = (-2, 4)$, ta có:
+            \begin{equation}
+                \begin{cases}
+                    \dfrac{4-\lambda_1}{2(\lambda_2 + 1)} = -2 \Leftrightarrow \lambda_1  -4\lambda_2 = 8\\\\
+                    \dfrac{\lambda_2 - \lambda_1 + 2}{2} = 4 \Leftrightarrow -\lambda_1 + \lambda_2 = 6
+                \end{cases}
+                \Leftrightarrow \begin{cases}
+                    \lambda_1 = \dfrac{-32}{3}\\\\
+                    \lambda_2 = \dfrac{-14}{3}
+                \end{cases}
+            \end{equation}
+        \end{itemize}
+        Ta loại điểm $(x_2, y_2) = (-2, 4)$ vì nó tương ứng với các nhân tử không thỏa mãn trường hợp đang xét. Do đó, điểm $(1,1)$ là một điểm KKT tương ứng với các nhân tử $(\lambda_1, \lambda_2) = \left(\dfrac{2}{3},\dfrac{2}{3}\right)$ và nó cũng thỏa mãn các ràng buộc đầu bài.
+        \item $\lambda_1 > 0$ và $\lambda_2 = 0$. Từ điều kiện $(c)$ và biểu thức (1.10), ta có:
+        \begin{equation}
+            \begin{cases}
+                x + y - 2 = 0 \\
+                x = \dfrac{4-\lambda_1}{2}\\\\
+                y = \dfrac{- \lambda_1 + 2}{2}
+            \end{cases}
+            \Leftrightarrow \lambda_1 = 1
+        \end{equation}
+        Do đó, điểm $\left(\dfrac{3}{2},\dfrac{1}{2}\right)$ là một điểm tương ứng với các nhân tử $(\lambda_1, \lambda_2) = (1, 0)$. Tuy nhiên điểm này không thỏa mãn ràng buộc, do đó nó không phải điểm KKT.
+        \item $\lambda_1 = 0$ và $\lambda_2 > 0$. Ta có:
+        \begin{equation}
+            \begin{cases}
+                x^2 - y = 0\\
+                x = \dfrac{4}{2(\lambda_2 + 1)}\\\\
+                y = \dfrac{\lambda_2 + 2}{2}
+            \end{cases}
+            \Leftrightarrow 
+            \begin{cases}
+                \left( \dfrac{4}{2(\lambda_2 + 1)}\right)^2 - \dfrac{\lambda_2 + 2}{2} = 0\\\\
+                x = \dfrac{4}{2(\lambda_2 + 1)}\\\\
+                y = \dfrac{\lambda_2 + 2}{2}
+            \end{cases}
+            \Leftrightarrow 
+            \begin{cases}
+                \lambda_2 \approx 0.71618\\
+                x \approx 1.16538 \\
+                y \approx 1.35803
+            \end{cases}
+        \end{equation}
+        Hai điểm này không thỏa mãn ràng buộc của bài toán.
+        \item $\lambda_1 = 0$ và $\lambda_2 = 0$. Từ biểu thức (1.10), ta được $(x, y) = (2, 1)$ tuy nhiên điểm này lại không thỏa mãn các ràng buộc đầu bài.
+    \end{enumerate}
+    Giá trị hàm mục tiêu tại các điểm mục tiêu:
+    \begin{itemize}
+        \item $f(1,1) = 1$
+    \end{itemize}
+    Vậy cực tiểu của bài toán đạt tại điểm điểm $(x, y) = (1,1)$
+\end{solution}

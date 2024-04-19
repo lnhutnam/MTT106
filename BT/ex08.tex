@@ -1,0 +1,110 @@
+\section{Bài 08}
+Trong bài toán tối ưu
+\begin{equation}
+    \begin{aligned}
+        \min \quad & (x+1)^2 + y^2\\
+        \textrm{s.t.} \quad & x + y \leq 0\\
+        &x^2 + y^2 = 1
+    \end{aligned}
+\end{equation}
+bắt đầu từ những điểm khởi tạo khác nhau, một thuật toán số trả về những điểm $(x^{*}, y^{*})$ như các ứng viên cho một cực tiểu địa phương:
+\begin{itemize}
+    \item $\left(\dfrac{-1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}}\right)$
+    \item $(-1, 0)$
+    \item $(0, 0)$
+    \item $\left(\dfrac{-1}{{2}}, \dfrac{-\sqrt{3}}{{2}}\right)$
+\end{itemize}
+\begin{enumerate}[label=(\alph*)]
+    \item Xác định những điểm nào trong đó mà thỏa mãn điều kiện KKT.
+    \item Xác định những điểm KKT nào mà thỏa mãn điều kiện cần cấp hai.
+    \item Xác định những điểm KKT nào mà thỏa mãn điều kiện đủ cấp hai.
+\end{enumerate}
+
+\begin{solution}
+
+    Các thành phần trong bài toán này như sau:
+    \begin{align}
+        \begin{aligned}
+            f(x,y) &= (x+1)^2 + y^2\\
+            g_1(x, y) &= x + y \\
+            h_1(x,y) &= x^2 + y^2 - 1\\
+        \end{aligned}
+    \end{align}
+    Ta hình thành hàm Lagrangian như sau
+    \begin{equation}
+        L(x,y, \lambda) = (x+1)^2 + y^2 + \lambda_1(x + y) + \mu_1(x^2 + y^2 - 1)
+    \end{equation}
+    và điều kiện KKT có thể được viết như sau:
+    \begin{itemize}
+        \item \begin{equation}
+            \dfrac{\partial L}{\partial x} = 2(x+1) + \lambda_1 + 2x\mu_1 = 0 \Leftrightarrow x = \dfrac{-\lambda_1 - 2}{2(\mu_1 + 1)}
+        \end{equation}
+        \item \begin{equation}
+            \dfrac{\partial L}{\partial y} = 2y + \lambda_1 + 2y\mu_1 = 0 \Leftrightarrow y = \dfrac{-\lambda_1}{2(1+\mu_1)}
+        \end{equation}
+        \item \begin{equation}
+            \lambda_1 \geq 0, x + y \leq 0, \lambda_1(x + y) = 0
+        \end{equation}
+        \item \begin{equation}
+            x^2 + y^2 - 1 = 0
+        \end{equation}
+    \end{itemize}
+    \begin{enumerate}[label=(\alph*)]
+        \item Xác định những điểm nào trong đó mà thỏa mãn điều kiện KKT.
+        \begin{itemize}
+            \item Xem xét điểm $\left(\dfrac{-1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}}\right)$
+            \begin{equation}
+                \left(\dfrac{-1}{\sqrt{2}}\right)^2 + \left(\dfrac{1}{\sqrt{2}}\right)^2 - 1 = 0
+            \end{equation}
+            \begin{equation}
+                \lambda_1 \geq 0, \left(\dfrac{-1}{\sqrt{2}}\right) +  \left(\dfrac{1}{\sqrt{2}}\right) = 0
+            \end{equation}
+            \begin{equation}
+                \begin{cases}
+                    \dfrac{-1}{\sqrt{2}} + \dfrac{\lambda_1 + 2}{2(\mu_1 + 1)} = 0 \\
+                    \dfrac{1}{\sqrt{2}} + \dfrac{\lambda_1}{2(1+\mu_1)} = 0
+                \end{cases}
+                \Leftrightarrow
+                \begin{cases}
+                    \lambda_1 = -1 \\
+                    \mu_1 = \frac{\sqrt{2}}{2}-1
+                \end{cases}
+            \end{equation}
+            Vậy điểm $\left(\dfrac{-1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}}\right)$ không thỏa mãn điều kiện KKT.
+            \item Xem xét điểm $(-1, 0)$
+            \begin{equation}
+                (-1)^2 + 0^2 - 1 = 0
+            \end{equation}
+            \begin{equation}
+                \lambda_1 \geq 0, \lambda_1(-1 + 0) = -\lambda_1 \leq 0 \Rightarrow \lambda_1 = 0
+            \end{equation}
+            \begin{equation}
+                \begin{cases}
+                     -1 + \dfrac{\lambda_1 + 2}{2(\mu_1 + 1)} = 0 \\
+                        \dfrac{\lambda_1}{2(1+\mu_1)} = 0
+                \end{cases}
+                \Leftrightarrow
+                \begin{cases}
+                    \lambda_1 = 0 \\ 
+                    \mu_1 = 0
+                \end{cases}
+            \end{equation}
+            Vậy, điểm $(-1, 0)$ thỏa mãn điều kiện KKT.
+            \item Xem xét điểm $(0, 0)$
+            \begin{equation}
+                (0)^2 + 0^2 - 1 \ne 0
+            \end{equation}
+            Vậy, điểm $(0, 0)$ không thỏa mãn điều kiện KKT.
+            \item Xem xét điểm $\left(\dfrac{-1}{{2}}, \dfrac{-\sqrt{3}}{{2}}\right)$
+            \begin{equation}
+                \left(\dfrac{-1}{{2}}\right)^2 + \left(\dfrac{-\sqrt{3}}{{2}}\right)^2 - 1 = 0
+            \end{equation}
+            \begin{equation}
+                \lambda_1 \geq 0, \lambda_1(\dfrac{-1}{{2}} + \dfrac{-\sqrt{3}}{{2}}) \leq 0 \Rightarrow \lambda_1 = 0 \Rightarrow y = 0
+            \end{equation}
+            Vây điểm $\left(\dfrac{-1}{{2}}, \dfrac{-\sqrt{3}}{{2}}\right)$ không thỏa mãn điều kiện KKT.
+        \end{itemize}
+        \item Xác định những điểm KKT nào mà thỏa mãn điều kiện cần cấp hai.
+        \item Xác định những điểm KKT nào mà thỏa mãn điều kiện đủ cấp hai.
+    \end{enumerate}
+\end{solution}

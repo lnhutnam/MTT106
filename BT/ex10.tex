@@ -1,0 +1,88 @@
+ \section{Bài 10}
+
+Xem xét bài toán
+\begin{equation}
+    \begin{aligned}
+        \max \quad & x_1^3 + x_2^3 + \dots + x_n^3\\
+        \textrm{s.t.} \quad & x_1^2 + x_2^2 + \dots + x_n^2 = 1,\\
+    \end{aligned}
+\end{equation}
+\begin{enumerate}[label=(\alph*)]
+    \item Chứng minh rằng điều kiện KKT phải thỏa mãn tại mỗi cực đại cục bộ.
+    \item Xác định tất cả các điểm KKT.
+    \item Xác định các cực đại toàn cục của bài toán.
+    \item Sử dụng câu trên để chứng minh bất đẳng thức
+    \begin{equation}
+        \sum_{i=1}^n| x_i|^3 \leq \left(\sum_{i=1}^nx_i^2\right)^{\frac{3}{2}}, \forall (x_1, \dots, x_n) \in \R^n
+    \end{equation}
+    \item Nếu có những KKT khác những cực tiểu cục bộ, xác định một trong các cực đại cục bộ.
+\end{enumerate}
+
+
+\begin{solution}
+
+    Các thành phần trong bài toán này như sau:
+    \begin{align}
+        \begin{aligned}
+            f(x) &= x_1^3 + x_2^3 + \dots + x_n^3 = \sum_{j=1}^nx_j^3\\
+            h_1(x) &= x_1^2 + x_2^2 + \dots + x_n^2 - 1 = -1 + \sum_{j=1}^nx_j^2  \\
+        \end{aligned}
+    \end{align}
+    \begin{enumerate}[label=(\alph*)]
+        \item Chứng minh rằng điều kiện KKT phải thỏa mãn tại mỗi cực đại cục bộ. Ta dễ dàng thấy được miền khả thi là compact, do đó theo định lý Weierstrass, bài toán này có cực đại toàn cục và cực đại toàn cục. 
+        \item Xác định tất cả các điểm KKT. Ta viết hàm Lagrangian như sau:
+        \begin{equation}
+            L(x, \mu) = \sum_{j=1}^nx_j^3 + \dfrac{\mu_1}{2}\left(-1 + \sum_{j=1}^nx_j^2\right)
+        \end{equation}
+        và các điều kiện KKT
+        \begin{itemize}
+            \item \begin{equation}
+                \dfrac{\partial L}{\partial x_i} = 3x_i^2 + 2\dfrac{\mu_1}{2} x_i = 3x_i^2 + \mu_1x_i = 0
+            \end{equation}
+            \item \begin{equation}
+                -1 + \sum_{i=1}^nx_i^2 = 0
+            \end{equation}
+        \end{itemize}
+        Tính tổng theo điều kiện KKT thứ nhất
+        \begin{equation}
+            3\sum_{i=1}^nx_i^2 + \mu_1\left(\sum_{i=1}^nx_i\right) = 3 + \mu_1\left(\sum_{i=1}^nx_i\right) = 0 \Leftrightarrow \left(\sum_{i=1}^nx_i\right) = -\dfrac{3}{\mu_1}
+        \end{equation}
+        Và bởi vì tất cả các hàm trong bài toán tối ưu là đối xứng với các biến $x_i$, không mất tính tổng quát, ta có thể giả định rằng 
+        \begin{equation}
+            x := (x_1, \dots, x_n) = (\underset{k\text{ lần}}{\underbrace{x_{+}, \dots, x_{+}}},\underset{n-k\text{ lần}}{\underbrace{x_{-}, \dots, x_{-}}})
+        \end{equation}
+        Từ biểu thức (10.8)
+        \begin{equation}
+            kx_{+}+(n-k)x_{-} = -\dfrac{3}{\mu_1} \Leftrightarrow x_{-} = -\dfrac{\dfrac{3}{\mu_1}+kx_{+}}{n-k}
+        \end{equation}
+        Điều kiện KKT thứ hai trở thành
+        \begin{equation}
+            kx_{+}^2 + (n-k)x_{-}^2 = 1 \Leftrightarrow nkx_{+}^2 +\dfrac{6k}{\mu_1}x_{+} + \dfrac{9}{\mu_1} = 0
+        \end{equation}
+        Ta có:
+        \begin{equation}
+            \Delta = 36\left(\dfrac{k^2}{\mu_1^2}-\dfrac{nk}{\mu_1}\right)
+        \end{equation}
+        Để phương trình (10.10) có nghiệm, thì $\Delta \geq 0 \Leftrightarrow k \geq n\mu_1$ có nghĩa là $0\leq \mu_1 \leq 1$. Ta có thể viết công thức nghiệm cho $x_{+}$ như sau:
+        \begin{equation}
+            x_{+} = \dfrac{-\dfrac{6k}{\mu_1}\pm 6\sqrt{\dfrac{k^2}{\mu_1^2}-\dfrac{nk}{\mu_1}}}{2nk}
+        \end{equation}
+        Thay vào biểu thức (10.9), ta được
+        \begin{equation}
+            x_{-} = -\dfrac{\dfrac{3}{\mu_1} + \dfrac{-\dfrac{6k}{\mu_1}\pm 6\sqrt{\dfrac{k^2}{\mu_1^2}-\dfrac{nk}{\mu_1}}}{2n}}{n-k}
+        \end{equation}
+        \item Xác định các cực đại toàn cục của bài toán. Như chứn minh trên, ta được các nghiệm
+        \begin{equation}
+            x_{+} = \dfrac{-\dfrac{6k}{\mu_1}\pm 6\sqrt{\dfrac{k^2}{\mu_1^2}-\dfrac{nk}{\mu_1}}}{2nk};\quad x_{-} = -\dfrac{\dfrac{3}{\mu_1} + \dfrac{-\dfrac{6k}{\mu_1}\pm 6\sqrt{\dfrac{k^2}{\mu_1^2}-\dfrac{nk}{\mu_1}}}{2n}}{n-k}
+        \end{equation}
+        Cực đại toàn cục đạt được khi $k=n-1, \mu_1 = 1$, 
+        \begin{equation}
+            x_{+} = -\dfrac{6}{2n}
+        \end{equation}
+        \item Sử dụng câu trên để chứng minh bất đẳng thức
+        \begin{equation}
+            \sum_{i=1}^n| x_i|^3 \leq \left(\sum_{i=1}^nx_i^2\right)^{\frac{3}{2}}, \forall (x_1, \dots, x_n) \in \R^n
+        \end{equation}
+        \item Nếu có những KKT khác những cực tiểu cục bộ, xác định một trong các cực đại cục bộ.
+    \end{enumerate}
+\end{solution}

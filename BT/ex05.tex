@@ -1,0 +1,82 @@
+\section{Bài 05}
+
+Xem xét bài toán
+\begin{equation}
+    \begin{aligned}
+        \min \quad & x^2 + y^2 + z^2\\
+        \textrm{s.t.} \quad & xyz \geq 8\\
+          & x \geq 0, y \geq 0, z \geq 0\\
+    \end{aligned}
+\end{equation}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Tìm tất cả các điểm thỏa mãn điều kiện KKT.
+    \item Sử dụng kiểm tra thỏa mãn bậc hai để xác định tất các các cực tiểu cục bộ và toàn cục.
+\end{enumerate}
+
+\begin{solution}
+
+    Các thành phần trong bài toán này như sau:
+    \begin{align}
+        \begin{aligned}
+            f(x,y) &= x^2 + y^2 + z^2\\
+            g_1(x,y) &= - xyz - 8\\
+            g_2(x, y) &= -x\\
+            g_3(x, y) &= -y\\
+            g_4(x, y) &= -z\\
+        \end{aligned}
+    \end{align}
+    Ta viết hàm Lagrangian như sau:
+    \begin{equation}
+        L(x, y, z, \lambda) = (x^2 + y^2 + z^2) - \lambda_1(xyz + 8) - \lambda_2x - \lambda_3y - \lambda_4z
+    \end{equation}
+    và các điều kiện KKT được viết như sau:
+    \begin{itemize}
+        \item \begin{equation}
+            \dfrac{\partial L}{\partial x} = 2x - \lambda_1yz - \lambda_2 = 0 \Leftrightarrow 2x^2 - \lambda_1xyz - \lambda_2x = 0
+        \end{equation}
+        \item \begin{equation}
+            \dfrac{\partial L}{\partial y} = 2y - \lambda_1xz - \lambda_3 = 0 \Leftrightarrow 2y^2 - \lambda_1xyz - \lambda_3y = 0
+        \end{equation}
+        \item \begin{equation}
+            \dfrac{\partial L}{\partial z} = 2z - \lambda_1xy - \lambda_4 = 0 \Leftrightarrow 2z^2 - \lambda_1xyz - \lambda_4z = 0
+        \end{equation}
+        \item \begin{equation}
+            \lambda_1 \geq 0, xyz - 8 \geq 0, \lambda_1(xyz - 8) = 0
+        \end{equation}
+        \item \begin{equation}
+            \lambda_2 \geq 0, x \geq 0, \lambda_2x = 0
+        \end{equation}
+        \item \begin{equation}
+            \lambda_3 \geq 0, y \geq 0, \lambda_3y = 0
+        \end{equation}
+        \item \begin{equation}
+            \lambda_4 \geq 0, z \geq 0, \lambda_4z = 0
+        \end{equation}
+    \end{itemize}
+    \begin{enumerate}[label=(\alph*)]
+        \item Tìm tất cả các điểm thỏa mãn điều kiện KKT. Ta xem xét các trường hợp như sau:
+        \begin{enumerate}[label=(\roman*)]
+            \item TH1 ($\lambda_1 > 0$). Từ biểu thức (5.7), ta có: $xyz = 8$, từ các biểu thức (5.4), (5.5), và (5.6) thu được hệ phương trình
+            \begin{equation}
+                \begin{cases}
+                    x(2x - \lambda_2) = 8\lambda_1\\
+                    y(2y - \lambda_3) = 8\lambda_1\\
+                    z(2z - \lambda_4) = 8\lambda_1\\
+                \end{cases}
+            \end{equation}
+            Ta có thể chứng minh được $x, y, z >0$. Và điều này dẫn tới việc $\lambda_2, \lambda_3, \lambda_4$ đều bằng 0. Ta viết lại hệ trên:
+            \begin{equation}
+                \begin{cases}
+                    2x^2 = 8\lambda_1 \Leftrightarrow x = 2\sqrt{2\lambda_1}\\
+                    2y^2 = 8\lambda_1 \Leftrightarrow y = 2\sqrt{2\lambda_1}\\
+                    2z^2 = 8\lambda_1 \Leftrightarrow z = 2\sqrt{2\lambda_1}\\
+                \end{cases}
+            \end{equation}
+            Ta có: $xyz = 8 \Leftrightarrow \left(2\sqrt{2\lambda_1}\right)^3 = 8 \Leftrightarrow \lambda_1 = \dfrac{1}{2}$.
+            Vậy, $ x = y = z = 2$
+            \item TH2 ($\lambda_1 = 0$). Trường hợp này, $x,y,z$ suy biến về 0. Ta không tìm được điểm KKT nào.
+        \end{enumerate}
+        \item Sử dụng kiểm tra thỏa mãn bậc hai để xác định tất các các cực tiểu cục bộ và toàn cục. \textbf{Đây là câu về điều kiện cấp hai.}
+    \end{enumerate}
+\end{solution}

@@ -1,0 +1,161 @@
+\section{Bài 06}
+
+Xemx xét bài toán 
+\begin{equation}
+    \begin{aligned}
+        \min \quad & \ln x - y\\
+        \textrm{s.t.} \quad & x^2 + y^2 \leq 4\\
+          & x \geq 1\\
+    \end{aligned}
+\end{equation}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Tìm tất cả các điểm thỏa mãn điều kiện FJ.
+    \item Tìm tất cả các điểm thỏa mãn điều kiện KKT.
+    \item Những điểm KKT nào mà có giá trị mục tiêu thấp nhất (lowest objective value)?
+    \item Xác định liệu một thỏa mãn điều kiện đủ cấp hai được thỏa mãn tại mỗi điểm KKT.
+\end{enumerate}
+
+\begin{solution}
+
+    Các thành phần trong bài toán này như sau:
+    \begin{align}
+        \begin{aligned}
+            f(x,y) &= \ln x - y\\
+            g_1(x,y) &= x^2 + y^2 - 4\\
+            g_2(x, y) &= -x + 1\\
+        \end{aligned}
+    \end{align}
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Tìm tất cả các điểm thỏa mãn điều kiện FJ. 
+
+        Ta hình thành dạng yếu của hàm Lagrangian như sau:
+        \begin{equation}
+            L(x, y, \lambda) = \lambda_0(\ln x - y) + \lambda_1(x^2 + y^2 - 4) - \lambda_2(x + 1)
+        \end{equation}
+        và các điều kiện FJ
+        \begin{itemize}
+            \item \begin{equation}
+                \dfrac{\lambda_0}{x} + 2x\lambda_1 - \lambda_2 = 0
+            \end{equation}
+            \item \begin{equation}
+                -\lambda_0 + 2y\lambda_1 = 0
+            \end{equation}
+            \item \begin{equation}
+                \lambda_1 \geq 0, x^2 + y^2 - 4 \leq 0, \lambda_1(x^2 + y^2 - 4) = 0
+            \end{equation}
+            \item \begin{equation}
+                \lambda_2 \geq 0, -x + 1 \leq 0, -\lambda_2(x-1) = 0
+            \end{equation}
+        \end{itemize}
+        Giả sử $\lambda_0 = 0$, ta có:
+        \begin{equation}
+            \begin{cases}
+                2x\lambda_1 - \lambda_2 = 0 \Leftrightarrow x = \dfrac{\lambda_2}{2\lambda_1}\\
+                2y\lambda_1 = 0\\
+            \end{cases}
+        \end{equation}
+        Điều này cho thấy $\lambda_1$ không thể bằng 0. Do đó, $y$ phải bằng 0. Thay $x$ vào biểu thức (6.7), ta tính được $\lambda_2 = 0$ hoặc $\lambda_2 = 2\lambda_1$. Trong cả trường hợp hai, ta được $x = 1$. Vậy điểm $(x, y) = (1, 0)$ là một điểm thỏa mãn điều kiện FJ. 
+        
+        Giả sử $\lambda_0 \ne 0$. Ta xét từng trường hợp dấu của các nhân tử
+        \begin{itemize}
+            \item TH1 ($\lambda_1 > 0, \lambda_2 > 0$): Từ biểu thức (6.6) và (6.7) ta có hệ 
+            \begin{equation}
+                \begin{cases}
+                    x^2 + y^2 - 4 = 0\\
+                    x - 1 = 0\\
+                \end{cases}
+                \Leftrightarrow 
+                \begin{cases}
+                    x = 1\\
+                    y = \pm \sqrt{3}
+                \end{cases}
+            \end{equation}
+            Các điểm $(x, y) = (1, \sqrt{3})$ và $(x, y) = (1, -\sqrt{3})$ thỏa mãn điều kiện FJ.
+            \item TH2 ($\lambda_1 = 0, \lambda_2 = 0$): Từ biểu thức (6.4) và (6.5) ta có:
+            \begin{equation}
+                \begin{cases}
+                    \dfrac{\lambda_0}{x} = 0\\
+                    -\lambda_0 = 0
+                \end{cases}
+            \end{equation}
+            Trường hợp này vi phạm điều kiện $\lambda_0 \ne 0$.
+            \item TH3 ($\lambda_1 > 0, \lambda_2 = 0$). Từ biểu thức (6.4), (6.5), và (6.6), ta có
+            \begin{equation}
+                \begin{cases}
+                    x^2 + y^2 = 4\\ 
+                    y = \dfrac{\lambda_0}{2\lambda_1}\\
+                    x = -\dfrac{\lambda_0}{2\lambda_1}\\
+                \end{cases}
+            \end{equation}
+            Giải hệ này, ta được nghiệm $(x, y) = (\sqrt{2}, -\sqrt{2})$ thỏa mãn.
+            \item TH4 ($\lambda_1 = 0, \lambda_2 > 0$). Từ biểu thức (6.5), $\lambda_1$ không thể bằng 0. Do đó, ta không tìm được điểm nào thỏa mãn FJ trong trường hợp này.
+        \end{itemize}
+        Vậy, các điểm thỏa mãn điều kiện FJ là $(x, y) = (\sqrt{2}, -\sqrt{2})$, $(x, y) = (1, 0)$, $(x, y) = (1, \sqrt{3})$ và $(x, y) = (1, -\sqrt{3})$.
+        \item Tìm tất cả các điểm thỏa mãn điều kiện KKT.
+        Ta hình thành hàm Lagrangian như sau:
+        \begin{equation}
+            L(x, y, \lambda) = (\ln x - y) + \lambda_1(x^2 + y^2 - 4) - \lambda_2(x + 1)
+        \end{equation}
+        và các điều kiện FJ
+        \begin{itemize}
+            \item \begin{equation}
+                \dfrac{\partial L}{\partial x} = \dfrac{1}{x} + 2\lambda_1x - \lambda_2 = 0 
+            \end{equation}
+            \item \begin{equation}
+                \dfrac{\partial L}{\partial y} = -1 + 2\lambda_1y = 0 \Leftrightarrow y = \dfrac{1}{2\lambda_1}
+            \end{equation}
+            \item \begin{equation}
+                \lambda_1 \geq 0, x^2 + y^2 - 4 \leq 0, \lambda_1(x^2 + y^2 - 4) = 0
+            \end{equation}
+            \item \begin{equation}
+                \lambda_2 \geq 0, -x + 1 \leq 0, -\lambda_2(x-1) = 0
+            \end{equation}
+        \end{itemize}
+        Ta xét từng trường hợp dấu của các nhân tử
+        \begin{itemize}
+            \item TH1 ($\lambda_1 > 0, \lambda_2 > 0$). Từ biểu thức (6.15), và (6.16) ta có hệ
+            \begin{equation}
+                \begin{cases}
+                    x^2 + y^2 = 4\\
+                    x = 1
+                \end{cases}
+                \Leftrightarrow 
+                \begin{cases}
+                    x = 1\\
+                    y = \pm\sqrt{3}
+                \end{cases}
+            \end{equation}
+            Các điểm $(x, y) = (1, \sqrt{3})$ và $(x, y) = (1, -\sqrt{3})$ thỏa mãn điều kiện KKT.
+            \item TH2 ($\lambda_1 = 0, \lambda_2 = 0$)
+            Từ biểu thức (6.13) và (6.14) ta có:
+            \begin{equation}
+                \begin{cases}
+                    \dfrac{1}{x} = 0\\
+                    -1 = 0
+                \end{cases}
+            \end{equation}
+            Hệ này vô lý nên không tìm được điểm nào thỏa mãn điều kiện KKT.
+            \item TH3 ($\lambda_1 > 0, \lambda_2 = 0$). Từ biểu thức (6.13), (6.14), và (6.15), ta có
+            \begin{equation}
+                \begin{cases}
+                    x^2 + y^2 = 4\\ 
+                    y = \dfrac{1}{2\lambda_1}\\
+                    x = -\dfrac{1}{2\lambda_1}\\
+                \end{cases}
+            \end{equation}
+            Giải này ta thu được $\lambda_1 = \dfrac{\sqrt{2}}{4}$. Ta có điểm $(x, y) = (\sqrt{2}, -\sqrt{2})$ thỏa mãn điều kiện KKT.
+            \item TH4 ($\lambda_1 = 0, \lambda_2 > 0$). Từ biểu thức (6.14), ta không thể tính được khi $\lambda_1 = 0$, nên ta không tìm được điểm nào thỏa mãn điều kiện KKT trong trường hợp này.
+        \end{itemize}
+        Vậy, các điểm $(x, y) = (\sqrt{2}, -\sqrt{2})$, $(x, y) = (1, \sqrt{3})$ và $(x, y) = (1, -\sqrt{3})$ là điểm thỏa mãn điều kiện KKT.
+        \item Những điểm KKT nào mà có giá trị mục tiêu thấp nhất (lowest objective value)? Ta có giá trị hàm mục tiêu tại các điểm KKT như sau:
+        \begin{itemize}
+            \item $f(\sqrt{2}, -\sqrt{2}) = 1.7608$
+            \item $f(1, -\sqrt{3}) = -\sqrt{3}$
+            \item $f(1, -\sqrt{3}) = \sqrt{3}$
+        \end{itemize}
+        Vậy tại điểm $(x,y) = (1, -\sqrt{3})$ giá trị mục tiêu thấp nhất (lowest objective value).
+        \item Xác định liệu một thỏa mãn điều kiện đủ cấp hai được thỏa mãn tại mỗi điểm KKT. \textbf{Đây là câu về điều kiện cấp hai.}
+    \end{enumerate}
+\end{solution}

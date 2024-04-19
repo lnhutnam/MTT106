@@ -1,0 +1,95 @@
+\section{Bài 02}
+
+Cho bài toán tối ưu
+\begin{equation}
+    \begin{aligned}
+        \min \quad & -xy\\
+        \textrm{s.t.} \quad & x + y = 8\\
+          &x\geq0, y \geq 0    \\
+    \end{aligned}
+\end{equation}
+mô hình cho vấn đề tìm kiếm một hình chữ nhật có diện tích lớp nhất với chu vi 16.
+
+\begin{enumerate}[label=(\alph*)]
+\item Viết điều kiện FJ, và chứng minh rằng $\lambda_0 \ne 0$, và do đó điều kiện KKT được thỏa mãn tại tất cả các điểm mà thỏa điều kiện FJ.
+\item Chứng minh rằng điểm $(x,y) = (4,4)$ thỏa mãn điều kiện KKT
+\item Xác định tất cả các điểm KKT của bài toán.
+\item Chứng minh rằng điểm $(x,y) = (4,4)$ thỏa mãn điều kiện đủ cấp hai, đó là một cực tiểu cục bộ (không nhất thiết là toàn cục) của bài toán. 
+\end{enumerate}
+
+\begin{solution}
+
+    Các thành phần trong bài toán này như sau:
+    \begin{align}
+        \begin{aligned}
+            f(x,y) &= -xy\\
+            g_1(x,y) &= -x\\
+            g_2(x, y) &= -y\\
+            h_1(x,y) &= x + y - 8
+        \end{aligned}
+    \end{align}
+    \begin{enumerate}
+        \item Ta hình thành dạng yếu của hàm Lagrangian như sau:
+    \begin{equation}
+        L = -\lambda_0xy -\lambda_1x - \lambda_2y + \mu_1(x + y - 8)
+    \end{equation}
+    Các điều kiện Fritz John (FJ) được viết như sau:
+    \begin{enumerate}[label=(\alph*)]
+        \item \begin{equation}
+            -\lambda_0y - \lambda_1 + \mu_1 = 0
+        \end{equation}
+        \item \begin{equation}
+            -\lambda_0x - \lambda_2 + \mu_1 = 0
+        \end{equation}
+        \item \begin{equation}
+            \lambda_1 \geq 0, - x \leq 0, \lambda_1x = 0
+        \end{equation}
+        \item \begin{equation}
+            \lambda_2 \geq 0, - y \leq 0, \lambda_2y = 0
+        \end{equation}
+    \end{enumerate}
+    Từ biểu thức (2.4) và (2.5), có:
+    \begin{equation}
+        x = \dfrac{-\lambda_2 + \mu_1}{\lambda_0},\quad y = \dfrac{-\lambda_1 + \mu_1}{\lambda_0}
+    \end{equation}
+    Dựa trên các điều kiện này, $\lambda_0 \ne 0$. Nếu $\lambda_0 = 0$, thì điều kiện $(a)$, và $(b)$ lần lượt trở thành:
+    \begin{equation}
+        \begin{cases}
+            - \lambda_1 + \mu_1 = 0 \\ 
+            - \lambda_2 + \mu_1 = 0
+        \end{cases}
+        \Leftrightarrow \mu_1 =  \lambda_1 = \lambda_2
+    \end{equation}
+    Ta sẽ không xác định được $x, y$ trong trường hợp này. Do đó, điều này là không thể. Do đó điều kiện KKT được thỏa mãn tại tất cả các điểm mà thỏa điều kiện FJ.
+    \item Chứng minh rằng điểm $(x,y) = (4,4)$ thỏa mãn điều kiện KKT. Thay điểm $(x,y) = (4,4)$ vào các điều kiện FJ ở trên, ta được:
+    \begin{enumerate}[label=(\alph*)]
+        \item \begin{equation}
+            -4\lambda_0 - \lambda_1 + \mu_1 = 0 \Leftrightarrow \lambda_0 = -\frac{-\lambda_1+\mu_1}{4}
+        \end{equation}
+        \item \begin{equation}
+            -4\lambda_0 - \lambda_2 + \mu_1 = 0 \Leftrightarrow \lambda_0 = -\frac{-\lambda_2+\mu_1}{4}
+        \end{equation}
+        \item \begin{equation}
+            \lambda_1 \geq 0, - 4 \leq 0, 4\lambda_1 = 0
+        \end{equation}
+        \item \begin{equation}
+            \lambda_2 \geq 0, - 4 \leq 0, 4\lambda_2 = 0
+        \end{equation}
+    \end{enumerate}
+    Từ các biểu thức trên $\lambda_1 = \lambda_2 = 0$. Và từ biểu thức (2.8)
+    \begin{equation}
+        x = y =4
+    \end{equation}
+    Vậy, $(x,y) = (4,4)$ thỏa mãn điều kiện KKT.
+    \item Xác định tất cả các điểm KKT của bài toán. Do bài toán đặt ra ban đầu là về tìm kiếm một hình chữ nhật có diện tích với chu vi là 16 nên $x, y$ phải khác 0, và từ biểu thức (2.8) ta có được:
+    \begin{equation}
+        x = \dfrac{\mu_1}{\lambda_0},\quad y = \dfrac{\mu_1}{\lambda_0}, \quad \lambda_1 = \lambda_2 = 0
+    \end{equation}
+    Do $x + y = 8$, nên
+    \begin{equation}
+        \dfrac{\mu_1}{\lambda_0} + \dfrac{\mu_1}{\lambda_0} = 8 \Leftrightarrow \mu_1 = 4\lambda_0 \Leftrightarrow x = y = 4
+    \end{equation}
+    Vậy, điểm $(x,y) = (4,4)$ là điểm KKT duy nhất của bài toán.
+    \item \textbf{Đây là câu về điều kiện cấp hai.}
+    \end{enumerate}
+\end{solution}

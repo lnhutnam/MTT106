@@ -1,0 +1,48 @@
+\section{Bài 12}
+
+Xem xét bài toán tối ưu bậc hai có ràng buộc
+\begin{equation}
+    \begin{aligned}
+        \min \quad & q(x) = \dfrac{1}{2}\left \langle Qx,x \right \rangle + \left \langle c,x \right \rangle\\
+        \textrm{s.t.} \quad & Ax = b,\\
+    \end{aligned}
+\end{equation}
+có một ma trận đối xứng $Q$ kích thước $n \times n$, và một vector $c \in \R^n$.
+\begin{enumerate}[label=(\alph*)]
+    \item Chứng minh rằng một cực tiểu địa phương $x^*$ phải thỏa mãn các điều kiện KKT $Qx^* + c \in R(A^T)$ và $Ax^* = b$.
+    \item Chứng minh một cực tiểu địa phương $x^*$ phải thỏa mãn điều kiện đủ bậc hai rằng $Q$ bán xác dịnh dương trong không gian con (subspace) $N(A)$, không gian không (null space) của $A$.
+    \item Chứng minh rằng một điểm KKT 
+\end{enumerate}
+
+\begin{solution}
+
+    Ta nhận thấy hàm ràng buộc có đạo hàm khác không tại mọi điểm trong miền khả thi, ta có thể giả sử rằng $\lambda_0 = 1$. Bằng cách bình phương hai vế của phương trình hàm ràng buộc, ta có thể viết lại bài toán như sau:
+    \begin{equation}
+        \begin{aligned}
+            \min \quad & q(x) = \dfrac{1}{2}\left \langle Qx,x \right \rangle + \left \langle c,x \right \rangle\\
+            \textrm{s.t.} \quad & \left \| x \right \|^2 = A^{-2}b^2,\\
+        \end{aligned}
+    \end{equation}
+    và hàm Lagrangian được viết như sau:
+    \begin{equation}
+        L = \dfrac{1}{2}\left \langle Qx,x \right \rangle + \left \langle c,x \right \rangle + \dfrac{\lambda}{2}\left(\left \| x \right \|^2 - A^{-2}b^2\right)
+    \end{equation}
+    Tại một cực tiểu địa phương $x^*$ của bài toán, ta có các điều kiện KKT như sau:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\Delta_x L = (Q+\lambda I)x^* + c = 0$, tức là $Qx^* + c \in R(A^T)$.
+        \item $\lambda \geq, \left \| x^* \right \| \leq A^{-1}b, \lambda(\left \| x^* \right \| - A^{-1}b) = 0$, tức là $Ax^* = b$.
+    \end{enumerate}
+    Từ điều kiện (a) và (b), cùng với điều kiện bậc hai, ta nhận thấy $Q + \lambda I$ là ma trận bán xác định dương. Thật vậy, trước hết ta giả định rằng $x^*$ là một cực tiểu địa phương của bài toán. Nếu $\left \| x^* \right \| < A^{-1}b$, thì $\lambda = 0$ và $x^*$ là một cực tiểu địa phương không ràng buộc của $q$, và do đó $Q$ là bán xác định dương theo Định lý Weierstrass. Nếu $\left \| x^* \right \| = A^{-1}b$ và $\left \| x \right \| = A^{-1}b$ là bất kỳ điểm khả thi nào, thì $q(x) - q(x^*) \geq 0$, và
+    \begin{align}
+        \begin{aligned}
+            &q(x) - q(x^*) \\ 
+            &=\left \langle \Delta q(x^*), x - x^*\right \rangle + \dfrac{1}{2}\left \langle Q(x-x^*),  x - x^*\right \rangle \\
+            &=-\lambda\left \langle  x^*, x - x^*\right \rangle + \dfrac{1}{2}\left \langle Q(x-x^*),  x - x^*\right \rangle \\
+            &=  \dfrac{1}{2}\left \langle (Q+\lambda I)(x-x^*),  x - x^*\right \rangle - \dfrac{\lambda}{2}(\left \| x - x^* \right \|^2 + 2\left \langle  x^*, x - x^*\right \rangle)\\
+            &= \dfrac{1}{2}\left \langle (Q+\lambda I)(x-x^*),  x - x^*\right \rangle  + \dfrac{\lambda}{2}(\left \| x \right \|^2 - \left \| x^* \right \|^2)
+        \end{aligned}
+    \end{align}
+    Điều này chỉ ra rằng $\left \langle (Q+\lambda I)(x-x^*),  x - x^*\right \rangle \geq 0$ với mọi $\left \| x \right \| = A^{-1}b$. Bởi vì $\left \langle  x^*, x - x^*\right \rangle \leq 0$, ta có $\left \langle (Q+\lambda I)d, d \right \rangle \geq 0$ với mọi $d$ thỏa mãn $\left \langle x^*,d \right \rangle \leq 0$, do đó với mọi $d \in \R^n$, $Q + \lambda I$ là bán xác định dương.
+
+    Hệ quả là, giả định rằng các điều kiện (a)-(c) thỏa mãn. Nếu $\left \| x^* \right \| < A^{-1}b$, thì $\lambda = 0$, và biến đổi trên chứng tỏ $x^*$ là một cực tiểu địa phương của $q$ trên $\R^n$. Nếu Nếu $\left \| x^* \right \| = A^{-1}b$, $x^*$ là một cực tiểu địa phương của $q$ trên bao đóng $\Bar{B}(0, A^{-1}b)$.
+\end{solution}

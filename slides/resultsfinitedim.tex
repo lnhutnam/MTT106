@@ -42,7 +42,90 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Discussion about the analytic content}
+\begin{frame}{Proof of Implicit function theorem}
+    At first, we need to setup something...\\
+    \vspace{1cm}
+    If necessary, considering the function
+    \begin{equation}
+        (x,y) \mapsto f(x + x_0, y+ y_0) - f(x_0, y_0)
+    \end{equation}
+    And, let 
+    \begin{equation}
+        f(x) = (f_1(x, y), \dots, f_m(x, y))
+    \end{equation}
+\end{frame}
+
+\begin{frame}{Proof of Implicit function theorem}
+    $Df$ is continous $\Rightarrow$ exist neighborhoods $U_0 \in \R^n$, $V_0 \in \R^m$ that
+    \begin{equation}
+        \begin{bmatrix}
+        \nabla_yf_1(x, y_1)^{\top}\\ 
+        \nabla_yf_2(x, y_2)^{\top}\\ 
+        \vdots\\ 
+        \nabla_yf_m(x, y_m)^{\top}
+        \end{bmatrix}
+    \end{equation}
+    is invertible for all $(x, y_i) \in U_0 \times V_0$.
+\end{frame}
+
+\begin{frame}{Proof of Implicit function theorem}
+    \textbf{Question}: Is every $x \in U_0$, then there exists at most one $y \in V_0$ such that $f(x, y) = 0$.
+    \vspace{0.5cm}
+    By contradiction, suppose that $\exists y, z \in V_0, y \ne z, f(x,y) = f(x,z) = 0$. Due the mean value theorem, $\exists y_i \in (y, z)$ that
+    \begin{equation}
+        f_i(x,z) - f_i(x,y) = \left \langle \nabla_yf_i(x,y_i), z -y \right \rangle
+    \end{equation}
+    And the previous matrix is non-singular, so $y = z$.
+\end{frame}
+
+\begin{frame}{Proof of Implicit function theorem}
+    Let $\overline{B}_r(0) \subseteq V_0$
+    \begin{itemize}
+        \item $f(0, y) \ne 0, \forall y \in S_r(0) := \{y \in \R^l : \left \| y \right \| = r\}$ due to $f(0,0) = 0$.
+        \item $\exists \alpha > 0, \left \| f(0, y) \geq \alpha \right \|, \forall y \in S_r(0)$ due to $f$ is continous.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof of Implicit function theorem}
+    Consider the function 
+    \begin{equation}
+        F(x, y) := \left \| f(x, y) \right \|^2 = \sum_{i=1}^mf_i(x, y)^2
+    \end{equation}
+    that satisfies the properties 
+    \begin{itemize}
+        \item $F(0, y) \geq \alpha > 0, \forall y \in S_r(0)$
+        \item $F(0, 0) = 0$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof of Implicit function theorem}
+    Because $F$ is continous function, $\exists U_1 \subseteq U_0$ of $0 \in \R^n$ such that
+    \begin{equation}
+        F(x,y) \geq \frac{\alpha}{2}, F(x, 0) \leq \frac{\alpha}{2} \forall x \in U_1, y \in S_r(0)
+    \end{equation}
+    fixed $x \in U_1$, function $y \mapsto F(x, y)$ achieves its minimum on $\overline{B}_r(0)$ at $y(x)$ in the interior of $\overline{B}_r(0)$
+    \begin{equation}
+        D_yF(x,y(x)) = 2D_yf(x, y(x))f(x,y(x)) = 0
+    \end{equation}
+    And the matrix $D_yf(x, y(x))$ is non-singular, so that
+    \begin{equation}
+        f(x,y(x)) = 0
+    \end{equation}
+\end{frame}
+
+\begin{frame}{Proof of Implicit function theorem}
+    Writting $\Delta y := y(x+\Delta x) - y(y)$, by the mean value theorem
+    \begin{equation}
+        0 = D_xf(\widetilde{x}, \widetilde{y})\Delta x + D_yf(\widetilde{x}, \widetilde{y})\Delta y
+    \end{equation}
+    for some point $(\widetilde{x}, \widetilde{y})$ one the line segment between $(x, y(x))$ and $(x + \Delta x, y(x + \Delta x))$. And as $\left \| \Delta x \right \| \rightarrow 0$,  $\left \| \Delta y \right \| \rightarrow 0$, thus lead $y(x)$ is continous.
+    \vspace{1cm}
+    And by Taylors formula and continuity of $y(x)$, we prove that $y(x)$ is Fréchet differentiable.
+    \vspace{1cm}
+    If $f \in C^2$, then $y(x) \in C^2$. And in general, if $C^k$, we prove by induction on $k$ that $y(x)$ is $C^k$.
+\end{frame}
+
+\begin{frame}{Discussion about the analytic meaning}
     \begin{parchment}[Problem]
         Solving the equation below:
         \begin{equation}
@@ -54,7 +137,7 @@
     In this meaning, Implicit function theorem is a theorem about the \textbf{possibility of solving a system of nonlinear equations}.
 \end{frame}
 
-\begin{frame}{Discussion about the geometric content}
+\begin{frame}{Discussion about the geometric meaning}
     There are 3 natural ways to represent a curve $S \subseteq \R^n$
     \begin{itemize}
         \item As a graph
@@ -63,7 +146,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Discussion about the geometric content}
+\begin{frame}{Discussion about the geometric meaning}
     Considering the case $n = 2$
     \begin{itemize}
         \item Graph: \begin{equation}
@@ -89,28 +172,28 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Discussion about the geometric content}
+\begin{frame}{Discussion about the geometric meaning}
     \begin{figure}[h!]
         \includegraphics[width=0.75\linewidth]{figures/implicit_function_example01.png}
         \caption{The line $2x − y + 2 = 0$ as the graph of $f(x) = 2x + 2$ or of $g(y) = (y − 2)/2$}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Discussion about the geometric content}
+\begin{frame}{Discussion about the geometric meaning}
     \begin{figure}[h!]
         \includegraphics[width=0.75\linewidth]{figures/implicit_function_example02.png}
         \caption{The thick arcs are the graphs of $x \mapsto \pm \sqrt{1-x^2}$}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Discussion about the geometric content}
+\begin{frame}{Discussion about the geometric meaning}
     \begin{figure}[h!]
         \includegraphics[width=0.75\linewidth]{figures/implicit_function_example03.png}
         \caption{The thick arcs are the graphs of $y \mapsto \pm \sqrt{1-y^2}$}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Discussion about the geometric content}
+\begin{frame}{Discussion about the geometric meaning}
     \begin{figure}[h!]
         \includegraphics[width=0.75\linewidth]{figures/implicit_function_example04.png}
         \caption{Can the thick line segments be a graph?}
@@ -346,6 +429,20 @@
         Moreover, if $\mathbf{f}$ is $C^k$, then $\mathbf{f}$ is a $C^k$ diffeomorphism on $U$.
     \end{block}
     \footnotetext{A diffeomorphism is an isomorphism of smooth manifolds. It is an invertible function that maps one differentiable manifold to another such that both the function and its inverse are continuously differentiable.}
+\end{frame}
+
+\begin{frame}{Proof of The Inverse Function Theorem}
+    We can define the function 
+    \begin{equation}
+        F(x, y) = f(x) - y
+    \end{equation}
+    and, find that
+    \begin{equation}
+        D_xF(x_0, y) = Df(x_0)
+    \end{equation}
+    is non-singular.
+    \vspace{1cm}
+    And apply the Implicit function theorem to $F$.
 \end{frame}
 
 \begin{frame}{The usage of Implicit Function Theorem}
